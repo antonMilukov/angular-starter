@@ -14,22 +14,29 @@
 </head>
 <body>
   <ul class="menu">
-    <li><a href="/main">main</a></li>
-    <li><a href="users/list">users</a></li>
+      <li><a ui-sref="admin.home" href="#">home</a></li>
+      <li><a ui-sref="admin.users-list" href="#">users</a></li>
   </ul>
 
   <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
 
-  <div ng-view></div>
+  <div ui-view></div>
 
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/firebase/firebase.js"></script>
+  <script src="bower_components/angularfire/dist/angularfire.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
   <script src="app.js"></script>
+  <script src="config/config.js"></script>
+  <script src="routes.js"></script>
+  <script src="auth.js"></script>
+  <script src="baseController.js"></script>
 
   <script src="pages/main/pages-main.js"></script>
   <script src="pages/users/list/pages-users-list.js"></script>
-
+  <script src="pages/login/pages-login.js"></script>
 </body>
 </html>

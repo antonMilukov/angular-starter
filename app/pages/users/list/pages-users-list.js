@@ -2,13 +2,7 @@
 
 angular.module('pagesUsersList', ['ngRoute'])
 
-.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/users/list', {
-    templateUrl: 'pages/users/list/index.html',
-    controller: 'UsersListCtrl'
-  });
-}])
-
-.controller('UsersListCtrl', [function() {
-  console.log("user list page");
-}]);
+.controller('UsersListCtrl', function(Auth, $scope, $firebaseObject, currentAuth) {
+  var ref = firebase.database().ref();
+  $scope.users = $firebaseObject(ref.child('users'));
+});
