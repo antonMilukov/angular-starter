@@ -3,48 +3,152 @@
 <!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>My AngularJS App</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="assets/app.css">
-  <base href="/">
+    <title ng-bind="oPage.getTitle()">...</title>
+    <base href="/">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="assets/app.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" id="theme" href="assets/joli/css/theme-blue.css"/>
     <style>
         [ng\:cloak], [ng-cloak], .ng-cloak {
             display: none !important;
         }
     </style>
 </head>
-<body ng-cloak>
 
-  <span ng-show="user"> {{ user.uid }} | <a href="javascript:void(0)" ng-click="oAuth.logOut()">Sign out</a> </span>
+<body ng-cloak ui-view="body">
 
-  <ul class="menu">
-      <li><a href="admin/">home</a></li>
-      <li><a href="admin/users/list">users</a></li>
-  </ul>
+<!-- START PAGE CONTAINER -->
+<div class="page-container">
 
-  <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-  <![endif]-->
+    <!-- START PAGE SIDEBAR -->
+    <div class="page-sidebar">
+        <!-- START X-NAVIGATION -->
+        <ul class="x-navigation">
+            <li class="xn-logo">
+                <a href="javascript:void(0)">Joli Admin</a>
+                <a href="javascript:void(0)" class="x-navigation-control"></a>
+            </li>
+            <li class="xn-title">Навигация</li>
+            <li>
+                <a ui-sref="admin.home" ><span class="fa fa-desktop"></span> <span class="xn-text">Главная</span></a>
+                <a ui-sref="admin.users-list"><span class="fa fa-users"></span> <span class="xn-text">Пользователи</span></a>
+                <a ui-sref="admin.categories-list"><span class="fa fa-list-ul"></span> <span class="xn-text">Категории</span></a>
+            </li>
+        </ul>
+        <!-- END X-NAVIGATION -->
+    </div>
+    <!-- END PAGE SIDEBAR -->
 
-  <div ui-view></div>
+    <!-- PAGE CONTENT -->
+    <div class="page-content">
 
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/angular-route/angular-route.js"></script>
-  <script src="bower_components/firebase/firebase.js"></script>
-  <script src="bower_components/angularfire/dist/angularfire.js"></script>
-  <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-  <script src="app.js"></script>
-  <script src="config/config.js"></script>
-  <script src="routes.js"></script>
-  <script src="auth.js"></script>
-  <script src="baseController.js"></script>
+        <!-- START X-NAVIGATION VERTICAL -->
+        <ul class="x-navigation x-navigation-horizontal x-navigation-panel">
+            <!-- TOGGLE NAVIGATION -->
+            <li class="xn-icon-button">
+                <a href="javascript:void(0)" class="x-navigation-minimize"><span class="fa fa-dedent"></span></a>
+            </li>
+            <!-- END TOGGLE NAVIGATION -->
 
-  <script src="pages/main/pages-main.js"></script>
-  <script src="pages/users/list/pages-users-list.js"></script>
-  <script src="pages/login/pages-login.js"></script>
+            <!-- SIGN OUT -->
+            <li class="xn-icon-button pull-right">
+                <a href="#" class="mb-control" data-box="#mb-signout"><span class="fa fa-sign-out"></span></a>
+            </li>
+            <!-- END SIGN OUT -->
+
+        </ul>
+        <!-- END X-NAVIGATION VERTICAL -->
+
+        <!-- START BREADCRUMB -->
+        <!--<ul class="breadcrumb">-->
+            <!--<li><a href="#">Link</a></li>-->
+            <!--<li class="active">Active</li>-->
+        <!--</ul>-->
+        <!-- END BREADCRUMB -->
+
+        <div class="page-title">
+            <h2><span class="fa fa-arrow-circle-o-left"></span> {{oPage.getTitle()}}</h2>
+        </div>
+
+        <!-- PAGE CONTENT WRAPPER -->
+        <div class="page-content-wrap">
+
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="panel panel-default">
+                        <!--<div class="panel-heading">-->
+                            <!--<h3 class="panel-title">Panel Title</h3>-->
+                        <!--</div>-->
+                        <div class="panel-body">
+                            <div ui-view></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <!-- END PAGE CONTENT WRAPPER -->
+    </div>
+    <!-- END PAGE CONTENT -->
+</div>
+<!-- END PAGE CONTAINER -->
+
+<!-- MESSAGE BOX-->
+<div class="message-box animated fadeIn" data-sound="alert" id="mb-signout">
+    <div class="mb-container">
+        <div class="mb-middle">
+            <div class="mb-title"><span class="fa fa-sign-out"></span> Log <strong>Out</strong> ?</div>
+            <div class="mb-content">
+                <p>Подтвердите выход</p>
+            </div>
+            <div class="mb-footer">
+                <div class="pull-right">
+                    <a ng-click="oAuth.logOut(); oPage.closeModal()" href="javascript:void(0)" class="btn btn-success btn-lg">Да</a>
+                    <button class="btn btn-default btn-lg mb-control-close">Нет</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END MESSAGE BOX-->
+
+<!-- START PRELOADS -->
+<audio id="audio-alert" src="assets/joli/audio/alert.mp3" preload="auto"></audio>
+<audio id="audio-fail" src="assets/joli/audio/fail.mp3" preload="auto"></audio>
+<!-- END PRELOADS -->
+
+<!-- START SCRIPTS -->
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/firebase/firebase.js"></script>
+<script src="bower_components/angularfire/dist/angularfire.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="app.js"></script>
+<script src="config/config.js"></script>
+<script src="routes.js"></script>
+<script src="auth.js"></script>
+<script src="baseController.js"></script>
+<script src="pages/home/home.js"></script>
+<script src="pages/users/users-list.js"></script>
+<script src="pages/auth/login.js"></script>
+<script src="pages/categories/categories-list.js"></script>
+<script src="components/page/page.js"></script>
+
+<script type="text/javascript" src="assets/joli/js/plugins/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="assets/joli/js/plugins/jquery/jquery-ui.min.js"></script>
+<script type="text/javascript" src="assets/joli/js/plugins/bootstrap/bootstrap.min.js"></script>
+<script type="text/javascript" src="assets/joli/js/plugins.js"></script>
+<script type="text/javascript" src="assets/joli/js/actions.js"></script>
+<!-- END SCRIPTS -->
 </body>
 </html>

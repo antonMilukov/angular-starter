@@ -1,6 +1,8 @@
 'use strict';
 
-angular.module('pagesLogin', ['ngRoute'])
+angular.module('pagesLogin', [
+	//
+])
 
 .controller('loginCtrl', function() {
 	console.log('login page');

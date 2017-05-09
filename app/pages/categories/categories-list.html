@@ -1,0 +1,16 @@
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Названия</th>
+        <th>Статус</th>
+        <th>Действия</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="category in categories">
+        <td>{{category.name}}</td>
+        <td>{{ (category.active) ? 'Активна' : 'Не активна'}}</td>
+        <td> --- </td>
+    </tr>
+    </tbody>
+</table>

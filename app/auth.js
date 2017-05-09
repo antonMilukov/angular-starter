@@ -1,28 +1,30 @@
-app.run(function($rootScope, $state, Auth, oAuth) {
-	$rootScope.$on('$locationChangeStart', function(event, toUrl, fromUrl) {
-		if ( $rootScope.user == undefined){
+app.run(function($rootScope, Auth, oAuth) {
+	
+	/** catch auth error and redirect to login page*/
+	$rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error) {
+		if (error === "AUTH_REQUIRED") {
 			oAuth.goLogin();
 		}
 	});
 	
 	$rootScope.oAuth = oAuth;
 	
-	Auth.$onAuthStateChanged(function(firebaseUser) {
-		if (firebaseUser) {
-			oAuth.goHome();
-			console.log("Signed in as:", firebaseUser.uid);
-		} else {
+	// track status of authentication
+	Auth.$onAuthStateChanged(function(user) {
+		var loggedIn = !!user;
+		if (!loggedIn) {
 			oAuth.goLogin();
-			console.log("Signed out");
 		}
+		$rootScope.user = user;
 	});
 });
+
 
 app.factory("Auth", function($firebaseAuth) {
 	return $firebaseAuth();
 });
 
-app.factory("oAuth", function(Auth, $rootScope, $location) {
+app.factory("oAuth", function(Auth, $rootScope, $location, $state) {
 	return {
 		
 		logOut: function () {
@@ -33,6 +35,7 @@ app.factory("oAuth", function(Auth, $rootScope, $location) {
 		logIn: function () {
 			return Auth.$signInAnonymously().then(function(firebaseUser) {
 				$rootScope.user = firebaseUser;
+				goHome();
 			}).catch(function(error) {
 				$rootScope.loginError = error;
 			});
@@ -61,7 +64,7 @@ app.factory("oAuth", function(Auth, $rootScope, $location) {
 	
 	// @todo change remove url hardcode
 	function goHome() {
-		$location.path('/admin');
+		$location.path('/admin/');
 	}
 	
 });

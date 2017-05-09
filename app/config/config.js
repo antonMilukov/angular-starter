@@ -9,3 +9,15 @@ app.config(function() {
 	
 	firebase.initializeApp(CONST_FIREBASE_PARAMS);
 });
+
+app.factory("CONSTS", function($rootScope) {
+	return {
+		'templatePath': 'assets/joli/'
+	}
+});
+
+app.run(function ($rootScope, CONSTS) {
+	$rootScope.CONSTS = CONSTS;
+})
+
+		
