@@ -1,4 +1,10 @@
 app.run(function($rootScope, $state, Auth, oAuth) {
+	$rootScope.$on('$locationChangeStart', function(event, toUrl, fromUrl) {
+		if ( $rootScope.user == undefined){
+			oAuth.goLogin();
+		}
+	});
+	
 	$rootScope.oAuth = oAuth;
 	
 	Auth.$onAuthStateChanged(function(firebaseUser) {
@@ -16,11 +22,12 @@ app.factory("Auth", function($firebaseAuth) {
 	return $firebaseAuth();
 });
 
-app.factory("oAuth", function(Auth, $rootScope, $state) {
+app.factory("oAuth", function(Auth, $rootScope, $location) {
 	return {
 		
 		logOut: function () {
 			Auth.$signOut();
+			$rootScope.user = undefined;
 		},
 		
 		logIn: function () {
@@ -47,12 +54,14 @@ app.factory("oAuth", function(Auth, $rootScope, $state) {
 		goLogin: goLogin
 	};
 	
+	// @todo change remove url hardcode
 	function goLogin() {
-		$state.go('login');
+		$location.path('/login');
 	}
 	
+	// @todo change remove url hardcode
 	function goHome() {
-		$state.go('admin.home');
+		$location.path('/admin');
 	}
 	
 });

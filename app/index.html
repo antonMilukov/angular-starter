@@ -11,11 +11,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="assets/app.css">
   <base href="/">
+    <style>
+        [ng\:cloak], [ng-cloak], .ng-cloak {
+            display: none !important;
+        }
+    </style>
 </head>
-<body>
+<body ng-cloak>
+
+  <span ng-show="user"> {{ user.uid }} | <a href="javascript:void(0)" ng-click="oAuth.logOut()">Sign out</a> </span>
+
   <ul class="menu">
-      <li><a ui-sref="admin.home" href="#">home</a></li>
-      <li><a ui-sref="admin.users-list" href="#">users</a></li>
+      <li><a href="admin/">home</a></li>
+      <li><a href="admin/users/list">users</a></li>
   </ul>
 
   <!--[if lt IE 7]>
