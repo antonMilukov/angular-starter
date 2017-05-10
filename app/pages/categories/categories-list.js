@@ -1,10 +1,10 @@
 'use strict';
 
-angular.module('pagesCategoriesList', [
+var pagesCategories = angular.module('pagesCategories', [
 	//
-])
+]);
 
-.controller('categoriesListCtrl', function(Auth, $scope, $firebaseArray) {
+pagesCategories. controller('categoriesListCtrl', function(Auth, $scope, $firebaseArray) {
 	var ref = firebase.database().ref();
 	$scope.categories = $firebaseArray(ref.child('categories'));
 });

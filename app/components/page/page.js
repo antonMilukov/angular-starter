@@ -1,4 +1,4 @@
-app.factory("oPage", function($state) {
+app.factory("oPage", function($state, $location) {
 	return {
 		getTitle: function () {
 			var result = '...';
@@ -14,6 +14,15 @@ app.factory("oPage", function($state) {
 			if (modal.length > 0){
 				modal.trigger('click');
 			}
+		},
+		
+		getDate: function (format) {
+			var format = format || 'MMMM Do YYYY, h:mm:ss a';
+			return moment().format(format);
+		},
+		
+		go: function (url) {
+			$location.path(url);
 		}
 	}
 });

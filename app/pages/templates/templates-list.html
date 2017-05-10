@@ -1,0 +1,21 @@
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Название</th>
+        <th>Время на набор участников в челлендж</th>
+        <th>Цена участия</th>
+        <th>Действия</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="item in items">
+        <td>{{item.name}}</td>
+        <td>{{item.time_posting}}</td>
+        <td>{{item.price_in_currency}}</td>
+        <td>
+            <button class="btn btn-default btn-rounded btn-sm"><span class="fa fa-pencil"></span></button>
+            <button class="btn btn-danger btn-rounded btn-sm"><span class="fa fa-times"></span></button>
+        </td>
+    </tr>
+    </tbody>
+</table>

@@ -1,10 +1,10 @@
 app.config(function() {
 	var CONST_FIREBASE_PARAMS = {
-		apiKey: "AIzaSyAfjyzHjLx_8wJ31MwKGdktcL8bWXTj3L8",
-		authDomain: "angular-9df3c.firebaseapp.com",
-		databaseURL: "https://angular-9df3c.firebaseio.com",
-		storageBucket: "gs://angular-9df3c.appspot.com/",
-		messagingSenderId: "15526884962"
+		apiKey: "AIzaSyCWBevwy3JUOAYa8owdxZAuCBxbGD8Gb20",
+		authDomain: "challenge-chat.firebaseapp.com",
+		databaseURL: "https://challenge-chat.firebaseio.com",
+		storageBucket: "challenge-chat.appspot.com",
+		messagingSenderId: "712100517779"
 	};
 	
 	firebase.initializeApp(CONST_FIREBASE_PARAMS);

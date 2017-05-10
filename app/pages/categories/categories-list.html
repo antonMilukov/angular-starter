@@ -1,7 +1,7 @@
 <table class="table table-striped">
     <thead>
     <tr>
-        <th>Названия</th>
+        <th>Название</th>
         <th>Статус</th>
         <th>Действия</th>
     </tr>
@@ -10,7 +10,10 @@
     <tr ng-repeat="category in categories">
         <td>{{category.name}}</td>
         <td>{{ (category.active) ? 'Активна' : 'Не активна'}}</td>
-        <td> --- </td>
+        <td>
+            <button title="Изменить" ng-click="oPage.go('admin/categories/edit/' + category.$id)" class="btn btn-default btn-rounded btn-sm"><span class="fa fa-pencil"></span></button>
+            <button class="btn btn-danger btn-rounded btn-sm"><span class="fa fa-times"></span></button>
+        </td>
     </tr>
     </tbody>
 </table>

@@ -5,10 +5,14 @@ app.config(function ($locationProvider, $urlRouterProvider, $stateProvider) {
 	$stateProvider
 		.state("login", {
 			url: "/login",
-			controller: "loginCtrl",
-			templateUrl: "pages/auth/login.html",
 			data: {
 				title: 'Авторизация'
+			},
+			views: {
+				'body': {
+					controller: "loginCtrl",
+					templateUrl: "pages/auth/login.html"
+				}
 			}
 		})
 		
@@ -47,6 +51,32 @@ app.config(function ($locationProvider, $urlRouterProvider, $stateProvider) {
 			templateUrl: "pages/categories/categories-list.html",
 			data: {
 				title: 'Категории'
+			}
+		})
+		.state("admin.categories-edit", {
+			url: "/categories/edit/:categoryId",
+			controller: "categoriesEditCtrl",
+			templateUrl: "pages/categories/categories-edit.html",
+			data: {
+				title: 'Добавить\\изменить категорию'
+			}
+		})
+		
+		.state("admin.tasks-list", {
+			url: "/tasks/list",
+			controller: "tasksListCtrl",
+			templateUrl: "pages/tasks/tasks-list.html",
+			data: {
+				title: 'Задания'
+			}
+		})
+		
+		.state("admin.templates-list", {
+			url: "/templates/list",
+			controller: "templatesListCtrl",
+			templateUrl: "pages/templates/templates-list.html",
+			data: {
+				title: 'Шаблоны'
 			}
 		})
 	

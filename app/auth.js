@@ -32,13 +32,15 @@ app.factory("oAuth", function(Auth, $rootScope, $location, $state) {
 			$rootScope.user = undefined;
 		},
 		
-		logIn: function () {
-			return Auth.$signInAnonymously().then(function(firebaseUser) {
+		logIn: function (email, password) {
+			console.log(email, password);
+			return Auth.$signInWithEmailAndPassword(email, password).then(function(firebaseUser) {
 				$rootScope.user = firebaseUser;
 				goHome();
 			}).catch(function(error) {
 				$rootScope.loginError = error;
 			});
+			return false;
 		},
 		
 		currentAuth: function () {

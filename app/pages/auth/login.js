@@ -4,6 +4,7 @@ angular.module('pagesLogin', [
 	//
 ])
 
-.controller('loginCtrl', function() {
-	console.log('login page');
+.controller('loginCtrl', function($scope) {
+	$scope.email = null;
+	$scope.password = null;
 });

@@ -4,9 +4,12 @@
 var app = angular.module('myApp', [
   'ngRoute',
   'ui.router',
+	'firebase',
   'pagesHome',
   'pagesUsersList',
   'pagesLogin',
-	'pagesCategoriesList',
-  'firebase'
+	'pagesCategories',
+	'pagesTasks',
+	'pagesTemplates'
+  
 ]);
